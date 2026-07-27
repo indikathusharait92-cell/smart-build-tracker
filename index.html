@@ -89,7 +89,10 @@
                 <button onclick="window.print()" class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold px-4 py-2 rounded-xl shadow-lg hover:scale-[1.02] transition flex items-center gap-1.5 text-xs">
                     <i class="fas fa-file-pdf"></i> Print PDF
                 </button>
-                <button onclick="logout()" class="bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 border border-rose-500/30 px-3.5 py-2 rounded-xl font-semibold transition text-xs flex items-center gap-1.5">
+                <button onclick="clearAllData()" class="bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 border border-rose-500/30 px-3.5 py-2 rounded-xl font-semibold transition text-xs flex items-center gap-1.5">
+                    <i class="fas fa-trash-alt"></i> Clear All
+                </button>
+                <button onclick="logout()" class="bg-slate-700/50 hover:bg-slate-700/80 text-slate-300 border border-slate-600 px-3.5 py-2 rounded-xl font-semibold transition text-xs flex items-center gap-1.5">
                     <i class="fas fa-sign-out-alt"></i> Lock
                 </button>
             </div>
@@ -471,6 +474,17 @@
         function deleteRecord(index) {
             if(confirm("මෙම සටහන ඉවත් කිරීමට ඔබට විශ්වාසද?")) {
                 expenses.splice(index, 1);
+                renderTable();
+            }
+        }
+
+        function clearAllData() {
+            if(confirm("සියලුම ඇතුළත් කළ දත්ත සහ Target Budget එක මකා දැමීමට ඔබට විශ්වාසද?")) {
+                expenses = [];
+                overallTargetBudget = 0;
+                localStorage.removeItem('budgetDataV5');
+                localStorage.removeItem('overallTargetBudgetV5');
+                targetInput.value = '';
                 renderTable();
             }
         }
